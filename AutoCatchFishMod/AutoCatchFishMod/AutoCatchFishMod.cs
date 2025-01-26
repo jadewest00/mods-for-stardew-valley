@@ -47,27 +47,8 @@ namespace AutoCatchFishMod
                         // Determine if the fish is in the no-quality list
                         int[] noQualityItems = { 132, 133, 134, 167, 168, 169, 170, 171, 172, 344, 793, 794, 795, 796, 797, 798 }; // Include IDs for different types of jellies
 
-                        int fishQuality = 0; // Default fish quality (normal)
-                        if (!Array.Exists(noQualityItems, id => id == fishItem.ParentSheetIndex))
-                        {
-                            // Determine fish quality
-                            int fishingLevel = player.FishingLevel;
-                            double qualityModifier = 0.03 * fishingLevel; // Each level increases chance by 3%
-
-                            if (Game1.random.NextDouble() < 0.25 + qualityModifier) // Chance for silver quality
-                            {
-                                fishQuality = 1;
-                            }
-                            if (Game1.random.NextDouble() < 0.10 + qualityModifier) // Chance for gold quality
-                            {
-                                fishQuality = 2;
-                            }
-                            if (Game1.random.NextDouble() < 0.02 + qualityModifier) // Chance for iridium quality
-                            {
-                                fishQuality = 4;
-                            }
-                        }
-
+                        int fishQuality = 4; // Default fish quality (normal)
+                    
                         int fishDifficulty = 50; // Default fish difficulty
 
                         fishItem.Quality = fishQuality; // Set the fish quality
@@ -94,7 +75,7 @@ namespace AutoCatchFishMod
                             1      // numCaught
                         );
 
-                        Game1.showGlobalMessage($"You caught a {fishItem.DisplayName}!");
+                        Game1.showGlobalMessage($"{fishItem.DisplayName}을(를) 잡았다!");
 
                         fishingRod.fishCaught = true;
                         fishingRod.DoFunction(Game1.currentLocation, (int)player.lastClick.X, (int)player.lastClick.Y, 0, player);
